@@ -1,6 +1,7 @@
 <?php
 
 include_once 'painel/helper/funcoes.php';
+include_once 'painel/bd/conexao.php';
 
 $pg = isset($_GET['pg']);
 
@@ -13,7 +14,7 @@ if ($pg) {
             include_once 'site/inicio.php';
             break;
 
-        case 'dashboard':
+        case 'pulu':
             include_once 'painel/paginas/includes/header.php';
             include_once 'painel/paginas/includes/menus.php';
             include_once 'painel/paginas/.php';
@@ -21,9 +22,27 @@ if ($pg) {
             break;
 
         case 'produtos':
+            //Fazer uma consulta no banco e disponibilizar o resultado
+            //$pessoa = new Pessoa
+
+            $resultDados = new conexao();
+            $dados = $resultDados->selecionaDados('SELECT * FROM produtos');
+
+            //include_once 'painel/paginas/includes/header.php';
+            //include_once 'painel/paginas/includes/menus.php';
+            //include_once 'painel/paginas/produtos.php';
+            //include_once 'painel/paginas/includes/footer.php';
+            break;
+
+        case 'produtos-item':            
+            
+            $i = $_GET['id'];            
+            $resultDados = new conexao();
+            $dados = $resultDados->selecionaDados('SELECT * FROM produtos WHERE id ='.$id);
+            
             include_once 'painel/paginas/includes/header.php';
             include_once 'painel/paginas/includes/menus.php';
-            include_once 'painel/paginas/produtos.php';
+            include_once 'painel/paginas/produtos-item.php';
             include_once 'painel/paginas/includes/footer.php';
             break;
 
@@ -37,7 +56,7 @@ if ($pg) {
         case 'Contato':
             include_once 'painel/paginas/includes/header.php';
             include_once 'painel/paginas/includes/menus.php';
-            include_once 'painel/paginas/Contato.php';            
+            include_once 'painel/paginas/Contato.php';
             include_once 'painel/paginas/includes/footer.php';
             break;
 
@@ -55,18 +74,18 @@ if ($pg) {
             break;
 
         default:
-            include_once 'painel/paginas/includes/header.php';
-            include_once 'painel/paginas/includes/menus.php';
-            include_once './painel/paginas/dashboard.php';
-            include_once 'painel/paginas/includes/footer.php';
+            //include_once 'painel/paginas/includes/header.php';
+            //include_once 'painel/paginas/includes/menus.php';
+           // include_once './painel/paginas/dashboard.php';
+           // include_once 'painel/paginas/includes/footer.php';
             break;
     }
 } else {
     //não existe
-    include_once 'painel/paginas/includes/header.php';
-    include_once 'painel/paginas/includes/menus.php';
-    include_once './painel/paginas/dashboard.php';
-    include_once 'painel/paginas/includes/footer.php';
+    //include_once 'painel/paginas/includes/header.php';
+    //include_once 'painel/paginas/includes/menus.php';
+    //include_once './painel/paginas/dashboard.php';
+    //include_once 'painel/paginas/includes/footer.php';
 }
 
    
